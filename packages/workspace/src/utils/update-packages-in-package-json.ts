@@ -49,13 +49,9 @@ export function updatePackagesInPackageJson(
             needsInstall = true;
           }
         } else if (updatedPackages[p].alwaysAddToPackageJson) {
-          const cleanVersion = checkAndCleanWithSemver(p, json.dependencies[p]);
-
-          if (lt(cleanVersion, cleanUpdatedVersion)) {
-            if (!json.dependencies) json.dependencies = {};
-            json.dependencies[p] = updatedPackages[p].version;
-            needsInstall = true;
-          }
+          if (!json.dependencies) json.dependencies = {};
+          json.dependencies[p] = updatedPackages[p].version;
+          needsInstall = true;
         }
       });
       return json;
